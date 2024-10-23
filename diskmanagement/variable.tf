@@ -32,3 +32,14 @@ variable "publicip_name" {
 variable "bastionhost_name" {
   type = string
 }
+
+variable "disk1" {
+  type = map(object({
+  name                = string
+  zone                = number
+  create_option         = string
+  storage_account_type  = string
+  disk_size_gb          = number
+   network_access_policy = string
+  }))
+}
