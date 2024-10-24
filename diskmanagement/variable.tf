@@ -25,6 +25,10 @@ variable "subnet" {
   }))
 }
 
+variable "nsg_name" {
+  type = string
+}
+
 variable "publicip_name" {
   type = string
 }

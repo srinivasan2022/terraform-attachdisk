@@ -10,6 +10,7 @@ write_files:
       #!/bin/bash
       # Detect the attached data disk (usually /dev/sdc, adjust as needed)
       DEVICE="/dev/sdc"
+      DEVICE1="/dev/sdd"
       
       # Check if the disk has already been partitioned
       if [ -z "$(lsblk -no FSTYPE $DEVICE)" ]; then
@@ -18,15 +19,20 @@ write_files:
           
           # Format the new partition with ext4 filesystem
           mkfs.ext4 ${DEVICE}1
+          mkfs.ext4 ${DEVICE1}
           
           # Create a mount point
           mkdir -p /mnt/datadisk
+          mkdir -p /mnt/data2
+ 
           
           # Mount the disk
           mount ${DEVICE}1 /mnt/datadisk
+          mount ${DEVICE1} /mnt/data2
           
           # Add the disk to /etc/fstab so it auto-mounts on boot
           echo "${DEVICE}1 /mnt/datadisk ext4 defaults,nofail 0 2" >> /etc/fstab
+           echo "${DEVICE1} /mnt/data2 ext4 defaults,nofail 0 2" >> /etc/fstab
       fi
     path: /var/lib/cloud/scripts/per-boot/disk-setup.sh
     permissions: "0755"

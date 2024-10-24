@@ -32,6 +32,23 @@ module "subnet" {
 
 }
 
+module "networksecuritygroup" {
+  source  = "Azure/avm-res-network-networksecuritygroup/azurerm"
+  version = "0.2.0"
+  
+  name = var.nsg_name
+  location = var.location
+  resource_group_name = module.rg.name
+  security_rules = local.nsg_rules
+  depends_on = [ module.rg , module.subnet]
+}
+
+module "nsg_associate" {
+  source = "../module/nsg_associate"
+  nsg_id = module.networksecuritygroup.resource_id
+  subnetid_nsg = module.subnet["subnet1"].resource_id
+}
+
 module "publicipaddress" {
   source  = "Azure/avm-res-network-publicipaddress/azurerm"
   version = "0.1.2"
