@@ -1,4 +1,4 @@
-resource_group = "DiskRG"
+resource_group = "DiskRG1"
 location = "West Europe"
 
 virtual_network = {

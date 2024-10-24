@@ -92,7 +92,7 @@ module "testvm" {
   admin_username                     = "azureuser"
   admin_password                     = "P@ssword1234"
   disable_password_authentication    = false
-  encryption_at_host_enabled         = true
+  encryption_at_host_enabled         = false
   generate_admin_password_or_ssh_key = false
   location                           = var.location
   name                               = "VM"
